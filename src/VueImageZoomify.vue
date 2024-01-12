@@ -10,13 +10,13 @@
     @mouseleave="handleMouseUp"
   >
     <canvas :id="canvasId"></canvas>
-    <button v-show="isShowZoomBtn && enableButton" @click="onZoomIn()">
+    <button @click="onZoomIn()">
       <img :src="ZoomIn" />
     </button>
-    <button v-show="isShowZoomBtn && enableButton" @click="onZoomOut()">
+    <button @click="onZoomOut()">
       <img :src="ZoomOut" />
     </button>
-    <button v-show="isShowZoomBtn && enableButton" @click="onZoomReset()">
+    <button @click="onZoomReset()">
       <img :src="ZoomReset" />
     </button>
   </div>
@@ -55,6 +55,16 @@ export default {
           );
         });
       },
+    },
+    enableButton(isEnableButton) {
+      const canvasContainerEl = document.querySelector(`.vue-image-zoomify`);
+      if (canvasContainerEl) {
+        const buttons = canvasContainerEl.getElementsByTagName("button");
+        Array.from(buttons).forEach((button) => {
+          button.style.display =
+            this.isShowZoomBtn && isEnableButton ? "block" : "none";
+        });
+      }
     },
   },
   data() {
@@ -137,6 +147,12 @@ export default {
           button.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
           button.style.left = `${btnLeft}px`;
           button.style.cursor = "pointer";
+          setTimeout(() => {
+            button.style.display =
+              this.isShowZoomBtn === true && this.enableButton === true
+                ? "block"
+                : "none";
+          }, 100);
 
           const icon = button.querySelector("img");
 
