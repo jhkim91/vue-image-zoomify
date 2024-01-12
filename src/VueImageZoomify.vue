@@ -10,13 +10,13 @@
     @mouseleave="handleMouseUp"
   >
     <canvas :id="canvasId"></canvas>
-    <button v-show="isShowZoomBtn" @click="onZoomIn()">
+    <button v-show="isShowZoomBtn && enableButton" @click="onZoomIn()">
       <img :src="ZoomIn" />
     </button>
-    <button v-show="isShowZoomBtn" @click="onZoomOut()">
+    <button v-show="isShowZoomBtn && enableButton" @click="onZoomOut()">
       <img :src="ZoomOut" />
     </button>
-    <button v-show="isShowZoomBtn" @click="onZoomReset()">
+    <button v-show="isShowZoomBtn && enableButton" @click="onZoomReset()">
       <img :src="ZoomReset" />
     </button>
   </div>
@@ -55,16 +55,6 @@ export default {
           );
         });
       },
-    },
-    enableButton(isEnableButton) {
-      const canvasContainerEl = document.querySelector(`.vue-image-zoomify`);
-      if (canvasContainerEl) {
-        const buttons = canvasContainerEl.getElementsByTagName("button");
-        Array.from(buttons).forEach((button) => {
-          button.style.display =
-            this.isShowZoomBtn && isEnableButton ? "block" : "none";
-        });
-      }
     },
   },
   data() {
@@ -138,8 +128,6 @@ export default {
         Array.from(buttons).forEach((button, i) => {
           const btnLeft =
             this.canvasWidth / 2 - (buttons.length * 55) / 2 + i * 55;
-          button.style.display =
-            this.isShowZoomBtn && this.enableButton ? "block" : "none";
           button.style.width = "40px";
           button.style.height = "40px";
           button.style.position = "absolute";
