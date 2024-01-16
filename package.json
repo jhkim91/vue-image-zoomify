@@ -1,9 +1,14 @@
 {
   "name": "vue-image-zoomify",
-  "version": "0.1.2",
+  "version": "1.0.1",
   "license": "MIT",
+  "homepage": "",
   "files": [
     "dist"
+  ],
+  "contributors": [
+    "JunheeKim <developer9101@gmail.com> (https://github.com/jhkim91)",
+    "kokyunghwan <goko1507@naver.com> (https://github.com/kokyunghwan)"
   ],
   "private": false,
   "scripts": {
@@ -13,6 +18,19 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhkim91/vue-image-zoomify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jhkim91/vue-image-zoomify/issues",
+    "email": "developer9101@gmail.com"
+  },
+  "keywords": [
+    "vue",
+    "image",
+    "zoom"
+  ],
   "main": "./dist/vue-image-zoomify.umd.js",
   "module": "./dist.vue-image-zoomify.es.js",
   "exports": {
