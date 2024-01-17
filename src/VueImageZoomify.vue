@@ -19,8 +19,8 @@
     <button @click="onZoomReset()">
       <img :src="ZoomReset" />
     </button>
-    <button @click="onFullScreen()">
-      <img :src="FullScreen" />
+    <button @click="onToggleFullScreen()">
+      <img :src="document.fullscreenElement ? InFullScreen : FullScreen" />
     </button>
   </div>
 </template>
@@ -31,6 +31,7 @@ import ZoomIn from "./assets/plus.svg";
 import ZoomOut from "./assets/minus.svg";
 import ZoomReset from "./assets/zoom-reset.svg";
 import FullScreen from "./assets/full-screen.svg";
+import InFullScreen from "./assets/in-full-screen.svg";
 
 export default {
   name: "VueImageZoomify",
@@ -78,6 +79,7 @@ export default {
       ZoomOut: ZoomOut,
       ZoomReset: ZoomReset,
       FullScreen: FullScreen,
+      InFullScreen: InFullScreen,
       canvasContainer: `canvas-container-${uuidv4()}`,
       canvasId: `canvas-id-${uuidv4()}`,
       canvasWidth: 0,
@@ -321,9 +323,22 @@ export default {
       this.adjustOffset();
       this.drawImage();
     },
-    onFullScreen(){
+    onToggleFullScreen(){
       const canvas = document.querySelector(`#${this.canvasContainer}`);
-      canvas.requestFullscreen();
+      
+      if (!document.fullscreenElement) {
+        if (canvas.requestFullscreen) return canvas.requestFullscreen();
+        if (canvas.webkitRequestFullscreen)
+          return canvas.webkitRequestFullscreen();
+        if (canvas.mozRequestFullScreen) return canvas.mozRequestFullScreen();
+        if (canvas.msRequestFullscreen) return canvas.msRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) return document.exitFullscreen();
+        if (document.webkitCancelFullscreen)
+          return document.webkitCancelFullscreen();
+        if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
+        if (document.msExitFullscreen) return document.msExitFullscreen();
+      }
     }
   },
 };
