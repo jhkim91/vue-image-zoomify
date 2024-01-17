@@ -87,7 +87,7 @@ export default {
       lastY: 0,
       offsetX: 0,
       offsetY: 0,
-      maxScale: 10,
+      maxScale: 100,
       minScale: 1,
       ctx: null,
       image: null,
@@ -142,7 +142,7 @@ export default {
 
         Array.from(buttons).forEach((button, i) => {
           const btnLeft =
-            this.canvasWidth / 2 - (buttons.length * 55) / 2 + i * 55;
+            this.canvasWidth / 2 - ((buttons.length * 55) / 2 - 7) + i * 55;
           button.style.width = "40px";
           button.style.height = "40px";
           button.style.position = "absolute";
@@ -320,9 +320,9 @@ export default {
       this.adjustOffset();
       this.drawImage();
     },
-    onToggleFullScreen(){
+    onToggleFullScreen() {
       const canvas = document.querySelector(`#${this.canvasContainer}`);
-      
+
       if (!document.fullscreenElement) {
         if (canvas.requestFullscreen) return canvas.requestFullscreen();
         if (canvas.webkitRequestFullscreen)
@@ -336,7 +336,7 @@ export default {
         if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
         if (document.msExitFullscreen) return document.msExitFullscreen();
       }
-    }
+    },
   },
 };
 </script>

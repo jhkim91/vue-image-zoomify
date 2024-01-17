@@ -3,27 +3,28 @@
 An image zooming feature for Vue, enabling zoom in and out functionalities.
 
 ## An example gif using the feature.
+
 - You can zoom in and out of the image by holding down the Ctrl button and using the wheel.
 - This feature can also be enabled without pressing the Ctrl button through the options.  
-<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/zoomWithWheel.gif?raw=true" />
+  <img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/zoomWithWheel.gif?raw=true" />
 
 - This feature demonstrates the act of clicking the zoom in, zoom out, and reset size buttons at the bottom.
 - The bottom buttons are provided by default and can be removed through options. Additionally, these buttons will only be activated when there is an image present.  
-<img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickBtn.gif" />
+  <img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickBtn.gif" />
 
 - Resize the image to fit the element area.
 - Maintain the original image size while adjusting the width or height to match the element size.  
-<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/resizeImageFit.gif?raw=true" />
+  <img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/resizeImageFit.gif?raw=true" />
 
 - This is an example of using a custom button.  
-  If you're not satisfied with the appearance or position of the button, customize it to your liking.  
-<img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickingTheCustomButton.gif" />
-
+   If you're not satisfied with the appearance or position of the button, customize it to your liking.  
+  <img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickingTheCustomButton.gif" />
 
 ### Install the package
 
 ```
 npm i vue-image-zoomify@latest
+yarn add vue-image-zoomify@latest
 ```
 
 ### Basic Usage
