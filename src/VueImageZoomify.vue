@@ -20,7 +20,7 @@
       <img :src="ZoomReset" />
     </button>
     <button @click="onToggleFullScreen()">
-      <img :src="document.fullscreenElement ? InFullScreen : FullScreen" />
+      <img :src="FullScreen" />
     </button>
   </div>
 </template>
@@ -31,7 +31,6 @@ import ZoomIn from "./assets/plus.svg";
 import ZoomOut from "./assets/minus.svg";
 import ZoomReset from "./assets/zoom-reset.svg";
 import FullScreen from "./assets/full-screen.svg";
-import InFullScreen from "./assets/in-full-screen.svg";
 
 export default {
   name: "VueImageZoomify",
@@ -41,7 +40,6 @@ export default {
     height: { type: String, default: "100%" },
     enableButton: { type: Boolean, default: true },
     isCtrlPressed: { type: Boolean, default: true },
-    isFullScreen: { type: Boolean, default: true }
   },
   watch: {
     src: {
@@ -79,7 +77,6 @@ export default {
       ZoomOut: ZoomOut,
       ZoomReset: ZoomReset,
       FullScreen: FullScreen,
-      InFullScreen: InFullScreen,
       canvasContainer: `canvas-container-${uuidv4()}`,
       canvasId: `canvas-id-${uuidv4()}`,
       canvasWidth: 0,
