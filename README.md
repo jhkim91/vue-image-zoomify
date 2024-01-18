@@ -4,21 +4,29 @@ An image zooming feature for Vue, enabling zoom in and out functionalities.
 
 ## An example gif using the feature.
 
+<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/Wheel_Zoom.gif?raw=true" />
+
 - You can zoom in and out of the image by holding down the Ctrl button and using the wheel.
-- This feature can also be enabled without pressing the Ctrl button through the options.  
-  <img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/zoomWithWheel.gif?raw=true" />
+- This feature can also be enabled without pressing the Ctrl button through the options.<br /><br />
+
+<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/Btn_Zoom.gif?raw=true" />
 
 - This feature demonstrates the act of clicking the zoom in, zoom out, and reset size buttons at the bottom.
-- The bottom buttons are provided by default and can be removed through options. Additionally, these buttons will only be activated when there is an image present.  
-  <img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickBtn.gif" />
+- The bottom buttons are provided by default and can be removed through options. Additionally, these buttons will only be activated when there is an image present.<br /><br />
+
+<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/Chrome_Resize.gif?raw=true" />
 
 - Resize the image to fit the element area.
-- Maintain the original image size while adjusting the width or height to match the element size.  
-  <img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/resizeImageFit.gif?raw=true" />
+- Maintain the original image size while adjusting the width or height to match the element size.<br /><br />
+
+<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/Fullscreen_Btn.gif?raw=true" />
+
+- Press the fullscreen button to view it larger<br /><br />
+
+<img src="https://github.com/jhkim91/vue-image-zoomify/blob/main/src/assets/Custom_Btn.gif?raw=true" />
 
 - This is an example of using a custom button.  
-   If you're not satisfied with the appearance or position of the button, customize it to your liking.  
-  <img src="https://raw.githubusercontent.com/jhkim91/vue-image-zoomify/main/src/assets/clickingTheCustomButton.gif" />
+   If you're not satisfied with the appearance or position of the button, customize it to your liking.<br /><br />
 
 ### Install the package
 
@@ -52,6 +60,7 @@ export default {
 - @onZoomIn
 - @onZoomOut
 - @onZoomReset
+- @onToggleFullScreen
 
 ### Usage Example
 
@@ -80,6 +89,7 @@ export default {
     <button v-if="!enableButton" @click="onClickZoom('in')">+</button>
     <button v-if="!enableButton" @click="onClickZoom('out')">-</button>
     <button v-if="!enableButton" @click="onClickZoom('reset')">reset</button>
+    <button v-if="!enableButton" @click="onClickZoom('fullsize')">fullsize</button>
 
   </div>
 </template>
@@ -112,6 +122,8 @@ export default {
         zoom.onZoomOut();
       } else if (val === "reset") {
         zoom.onZoomReset();
+      } else if (val === "fullsize") {
+        zoom.onToggleFullScreen();
       }
     },
     changeEnableButton(){
