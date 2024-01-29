@@ -54,14 +54,12 @@ export default {
               this.handleWidthChange(entry);
             }
           });
-          resizeObserver.observe(
-            document.querySelector(`#${this.canvasContainer}`)
-          );
+          resizeObserver.observe(this.getElementById(this.canvasContainer));
         });
       },
     },
     enableButton(isEnableButton) {
-      const canvasContainerEl = document.querySelector(`.vue-image-zoomify`);
+      const canvasContainerEl = this.getElementById(this.canvasContainer);
       if (canvasContainerEl) {
         const buttons = canvasContainerEl.getElementsByTagName("button");
         Array.from(buttons).forEach((button) => {
@@ -99,17 +97,18 @@ export default {
   },
   methods: {
     handleWidthChange(entry) {
+      const canvasContainerEl = this.getElementById(this.canvasContainer);
+      const canvasEl = this.getElementById(this.canvasId);
+      if (canvasContainerEl === null || canvasEl === null) return;
+
       if (this.existingScale === 0) {
-        const { width, height } = document
-          .querySelector(`#${this.canvasContainer}`)
-          .getClientRects()[0];
+        const { width, height } = canvasContainerEl.getClientRects()[0];
         this.canvasWidth = width;
         this.canvasHeight = height;
 
-        const canvas = document.querySelector(`#${this.canvasId}`);
-        canvas.width = width;
-        canvas.height = height;
-        this.ctx = canvas.getContext("2d");
+        canvasEl.width = width;
+        canvasEl.height = height;
+        this.ctx = canvasEl.getContext("2d");
         this.image = new Image();
         this.image.src = this.src;
         this.image.onload = () => {
@@ -125,9 +124,8 @@ export default {
         };
       } else {
         const { width, height } = entry.contentRect;
-        const canvas = document.querySelector(`#${this.canvasId}`);
-        canvas.width = width;
-        canvas.height = height;
+        canvasEl.width = width;
+        canvasEl.height = height;
         this.canvasWidth = width;
         this.canvasHeight = height;
         this.fitImageIntoCanvas();
@@ -135,7 +133,6 @@ export default {
         this.drawImage();
       }
 
-      const canvasContainerEl = document.querySelector(`.vue-image-zoomify`);
       if (canvasContainerEl) {
         canvasContainerEl.style.position = "relative";
         const buttons = canvasContainerEl.getElementsByTagName("button");
@@ -193,7 +190,7 @@ export default {
       }
     },
     adjustOffset() {
-      const canvas = document.querySelector(`#${this.canvasId}`);
+      const canvas = this.getElementById(this.canvasId);
       const imgWidth = this.originalWidth * this.scale;
       const imgHeight = this.originalHeight * this.scale;
 
@@ -218,7 +215,7 @@ export default {
       }
     },
     drawImage() {
-      const canvas = document.querySelector(`#${this.canvasId}`);
+      const canvas = this.getElementById(this.canvasId);
       this.ctx.clearRect(0, 0, canvas.width, canvas.height);
       this.ctx.drawImage(
         this.image,
@@ -232,7 +229,7 @@ export default {
       if (this.isCtrlPressed && !event.ctrlKey) return;
 
       event.preventDefault();
-      const canvas = document.querySelector(`#${this.canvasId}`);
+      const canvas = this.getElementById(this.canvasId);
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -267,7 +264,7 @@ export default {
         const offsetX = event.clientX - this.lastX;
         const offsetY = event.clientY - this.lastY;
 
-        const canvas = document.querySelector(`#${this.canvasId}`);
+        const canvas = this.getElementById(this.canvasId);
 
         const imgWidth = this.originalWidth * this.scale;
         const imgHeight = this.originalHeight * this.scale;
@@ -296,7 +293,7 @@ export default {
       this.zoom(0.8);
     },
     zoom(zoomMultiplier) {
-      const canvas = document.querySelector(`#${this.canvasId}`);
+      const canvas = this.getElementById(this.canvasId);
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
@@ -321,7 +318,7 @@ export default {
       this.drawImage();
     },
     onToggleFullScreen() {
-      const canvas = document.querySelector(`#${this.canvasContainer}`);
+      const canvas = this.getElementById(this.canvasContainer);
 
       if (!document.fullscreenElement) {
         if (canvas.requestFullscreen) return canvas.requestFullscreen();
@@ -336,6 +333,9 @@ export default {
         if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
         if (document.msExitFullscreen) return document.msExitFullscreen();
       }
+    },
+    getElementById(id) {
+      return document.querySelector(`#${id}`);
     },
   },
 };
